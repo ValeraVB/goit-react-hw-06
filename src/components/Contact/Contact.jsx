@@ -1,7 +1,15 @@
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
 import { Person, Phone, Delete } from "@mui/icons-material";
 import "./Contact.css";
 
-const Contact = ({ name, number, onDelete, id }) => {
+const Contact = ({ name, number, id }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <li className="contact-item">
       <div className="contact-details">
@@ -14,7 +22,7 @@ const Contact = ({ name, number, onDelete, id }) => {
           <span>{number}</span>
         </div>
       </div>
-      <button className="delete-button" onClick={() => onDelete(id)}>
+      <button className="delete-button" onClick={handleDelete}>
         <Delete className="delete-icon" />
         Delete
       </button>
